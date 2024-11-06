@@ -21,7 +21,7 @@ By the end of this lab, you will have practical experience using these tools for
 2. Install the required libraries using the `requirements.txt` file.
 3. Ensure you have **Ollama** installed and running locally.
 
-- [How to install Ollama](https://ollama.ai/docs/installation)
+- [Install Ollama]([https://ollama.ai/docs/installation](https://ollama.com/download))
 
 ### Tools Overview
 
