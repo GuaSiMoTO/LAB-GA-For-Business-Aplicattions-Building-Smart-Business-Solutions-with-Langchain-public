@@ -91,7 +91,7 @@ AI:
 
 ---
 
-### Iteration 5: Testing the Langflow Assistant
+### Iteration 6: Testing the Langflow Assistant
 
 1. Test the flow by interacting with the assistant through the **Chat Input** node.
 2. Verify that the assistant retains context and provides personalized, accurate responses based on previous exchanges.
