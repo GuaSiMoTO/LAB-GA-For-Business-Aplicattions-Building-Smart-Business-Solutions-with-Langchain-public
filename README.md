@@ -48,23 +48,40 @@ In this part, you will design a virtual assistant with memory that provides cont
 3. Connect the **Chat Input** node to the **Memory** node to pass user queries through the memory.
 
 ---
+## Iteration 3: Adding File Input and Parsing Data
 
-### Iteration 3: Adding a Prompt Template
+1. Add a **File** node to allow the assistant to load the `book_store.json` file. 
+   - Configure the **File** node to accept `.json` files.
+   - Ensure that the students use the provided `book_store.json` file.
+
+2. Add a **Parse Data** node to process the JSON file.
+   - Configure the node to extract and format the list of books from the JSON file.
+   - The extracted data should be in a format that can be passed as input to the **Prompt Template** node.
+
+3. Connect the **File** node to the **Parse Data** node to enable the file content to be processed and parsed.
+
+---
+
+### Iteration 4: Adding a Prompt Template
 
 1. Add a **Prompt Template** node to organize the assistant's behavior and responses.
-2. Configure the prompt to include both the user's current query and the conversation history stored in memory.
+2. Configure the prompt to include:
+   - The user's current query.
+   - The conversation history stored in memory.
+   - The parsed book data from the `book_store.json` file.
 3. Connect the **Chat Input** and **Memory** nodes to the **Prompt Template** node.
 
 ```
-You are a helpful virtual assistant for an online bookstore. Use the following conversation history and the user's current query to provide accurate and concise responses. If the user asks for book recommendations, suggest books based on previous genres mentioned.
-
+You are a helpful virtual assistant for an online bookstore. Use the following conversation history, the user's current query, and the list of available books to provide accurate and concise responses. If the user asks for book recommendations, suggest books based on previous genres mentioned.
+Available Books: {books}
 Conversation History: {history}
 User Message: {user_message}
+AI:
 ```
 
 ---
 
-### Iteration 4: Connecting the Model and Chat Output
+### Iteration 5: Connecting the Model and Chat Output
 
 1. Add a **Model Node** to process the prompt and generate responses using an Ollama model.
   - Model Name: Use a supported model, such as llama3 or any custom model installed in your Ollama setup.
