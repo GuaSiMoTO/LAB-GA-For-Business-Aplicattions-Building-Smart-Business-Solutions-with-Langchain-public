@@ -55,13 +55,22 @@ In this part, you will design a virtual assistant with memory that provides cont
 2. Configure the prompt to include both the user's current query and the conversation history stored in memory.
 3. Connect the **Chat Input** and **Memory** nodes to the **Prompt Template** node.
 
+```
+You are a helpful virtual assistant for an online bookstore. Use the following conversation history and the user's current query to provide accurate and concise responses. If the user asks for book recommendations, suggest books based on previous genres mentioned.
+
+Conversation History: {history}
+User Message: {user_message}
+```
+
 ---
 
 ### Iteration 4: Connecting the Model and Chat Output
 
 1. Add a **Model Node** to process the prompt and generate responses using an Ollama model.
-2. Add a **Chat Output** node to display the assistant's response to the user.
-3. Connect the **Prompt Template** node to the **Model Node** and the **Model Node** to the **Chat Output** node.
+  - Model Name: Use a supported model, such as llama3 or any custom model installed in your Ollama setup.
+  - Temperature: Adjust for creative (>0.7) or deterministic (~0.1) outputs.
+3. Add a **Chat Output** node to display the assistant's response to the user.
+4. Connect the **Prompt Template** node to the **Model Node** and the **Model Node** to the **Chat Output** node.
 
 ---
 
