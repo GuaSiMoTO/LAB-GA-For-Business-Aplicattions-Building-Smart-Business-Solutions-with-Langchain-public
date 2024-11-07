@@ -100,6 +100,8 @@ AI:
 
 ## Part 2: Specialized Response Routing with Langchain
 
+The student must create a **Jupyter Notebook** to execute this exercise. Ensure that the notebook is set up with all necessary dependencies and that each iteration is completed within the notebook to allow for step-by-step testing and debugging.
+
 ### Iteration 1: Setting Up Langchain
 
 1. Initialize a new Python project and install the necessary dependencies for Langchain and Ollama.
