@@ -100,35 +100,79 @@ AI:
 
 ## Part 2: Specialized Response Routing with Langchain
 
-In this part, you will build a router that directs user queries to specialized templates. Each template will guide **Ollama** to respond as an expert in a specific field.
-
----
-
 ### Iteration 1: Setting Up Langchain
 
-1. Initialize a new Python project and configure the Langchain environment.
-2. Set up a backend to integrate with the **Ollama** model.
+1. Initialize a new Python project and install the necessary dependencies for Langchain and Ollama.
+2. Configure the **Ollama** model as the language model for the project.
+3. Verify that the **Ollama** model is working correctly by generating a response to a simple prompt.
 
 ---
 
-### Iteration 2: Defining Templates
+### Iteration 2: Defining Templates and Destination Chains
 
-1. Create templates for specialized domains such as programming, data analysis, and machine learning.
-2. Map each intent to a corresponding template for domain-specific responses.
+1. Create specialized templates for domains such as machine learning and data analysis. Use the examples provided for guidance.
+
+```
+machine_learning_template = """You are a highly knowledgeable machine learning expert. \
+You are excellent at answering questions about algorithms, implementation techniques, \
+and best practices in machine learning. \
+When you don't know the answer to a question, admit that you don't know.
+
+Here is a question:
+{input}"""
+
+data_analysis_template = """You are a skilled data analyst. \
+You excel at explaining data analysis techniques, visualizations, and insights. \
+Your answers are clear, practical, and based on real-world scenarios. \
+If you don't know the answer to a question, say that you don't know.
+
+Here is a question:
+{input}"""
+```
+2. Organize the templates using a structure that includes the name, description, and template content for each domain.
+
+```
+prompt_infos = [
+    {
+        "name": "machine learning",
+        "description": "Good for answering questions about machine learning",
+        "prompt_template": machine_learning_template
+    },
+    {
+        "name": "data analysis",
+        "description": "Good for answering questions about data analysis",
+        "prompt_template": data_analysis_template
+    }
+]
+```
+
+3. Map each template to a **destination chain**.
+4. Define a default chain to handle queries that do not match any specific domain.
 
 ---
 
-### Iteration 3: Building the Router
+### Iteration 3: Setting Up the Multi-Prompt Router
 
-1. Set up a router to dynamically assign templates based on the user’s query.
-2. Configure logic to match user input with the appropriate intent and template.
+1. Create a `MULTI_PROMPT_ROUTER_TEMPLATE` to guide the model in selecting the appropriate template based on the user’s query. Ensure the template specifies the format for the output as a JSON object with `destination` and `next_inputs` keys.
+2. Generate the descriptions for the candidate prompts to include in the multi-prompt template.
+3. Define the router prompt using the template and configure it with an output parser.
+4. Create the router chain that processes user queries using the defined prompt and logic.
 
 ---
 
-### Iteration 4: Adding Intent Detection
+### Iteration 4: Implementing Routing Logic
 
-1. Implement a mechanism to detect the user’s intent based on keywords or context.
-2. Test the routing system to ensure queries are correctly matched to the appropriate domain template.
+1. Use the router chain to determine the appropriate destination for each query.
+2. Implement logic to execute the corresponding chain based on the `destination` returned by the router.
+3. Add fallback logic to use the default chain if the destination is not recognized.
+
+---
+
+### Iteration 5: Testing the Router
+
+1. Test the router by providing a variety of queries to the system, covering different domains and edge cases.
+2. Verify that each query is routed to the correct domain template and generates an appropriate response.
+3. Debug and refine the router logic if any queries are misrouted.
 
 ---
 
