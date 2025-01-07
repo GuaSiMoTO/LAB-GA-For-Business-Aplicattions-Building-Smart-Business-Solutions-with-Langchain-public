@@ -50,11 +50,10 @@ In this part, you will design a virtual assistant with memory that provides cont
 ---
 ## Iteration 3: Adding File Input and Parsing Data
 
-1. Add a **File** node to allow the assistant to load the `book_store.json` file. 
+1. Add a **File** node in **Data** component to allow the assistant to load the `book_store.json` file. 
    - Configure the **File** node to accept `.json` files.
-   - Ensure that the students use the provided `book_store.json` file.
 
-2. Add a **Parse Data** node to process the JSON file.
+2. Add a **Parse Data** node in **Processing** component to process the JSON file.
    - Configure the node to extract and format the list of books from the JSON file.
    - The extracted data should be in a format that can be passed as input to the **Prompt Template** node.
 
