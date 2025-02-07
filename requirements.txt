@@ -1,6 +1,0 @@
-langflow
-langchain-core
-langchain-ollama
-langchain
-ollama
-python-dotenv
