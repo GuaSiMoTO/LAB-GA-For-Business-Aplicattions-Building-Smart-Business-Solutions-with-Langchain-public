@@ -20,7 +20,7 @@ This lab develops an interactive web application that allows users to upload PDF
 Before starting, configure the environment and install the necessary libraries:
 
 ```bash
-pip install streamlit langchain_community langchain_text_splitters pdfplumber
+pip install streamlit langchain_community langchain_text_splitters pdfplumber langchain_ollama langchain_core
 ```
 
 ---
