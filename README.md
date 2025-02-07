@@ -102,15 +102,6 @@ prompt_infos = [
 
 ## Testing and Expected Outputs
 
-### Langflow Assistant
-- Handles multi-turn conversations seamlessly.
-- Retains context from earlier interactions to provide personalized and consistent responses.
-- Example:
-  - **User**: "Can you recommend a sci-fi book?"
-  - **Assistant**: "Sure, I recommend 'Dune' by Frank Herbert."
-  - **User**: "What other sci-fi books do you recommend?"
-  - **Assistant**: "You might also enjoy 'Neuromancer' by William Gibson."
-
 ### Langchain Router
 - Provides domain-specific responses by routing queries to specialized templates.
 - Example:
