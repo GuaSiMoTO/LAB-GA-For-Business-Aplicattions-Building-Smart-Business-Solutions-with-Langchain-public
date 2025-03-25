@@ -19,6 +19,8 @@ Create a prompt router that redirects user questions to specialized templates ba
 ### Iteration 1: Langchain Setup
 
 1. Create an environment with `langchain` and `ollama`.
+```pip install langchain_ollama```
+
 2. Test a simple prompt to verify Ollama is working.
 
 ### Iteration 2: Create Specialized Templates
@@ -26,11 +28,11 @@ Create a prompt router that redirects user questions to specialized templates ba
 Define the following templates:
 
 ```python
-machine_learning_template = """You are a highly knowledgeable machine learning expert...
+machine_learning_template = """You are a highly knowledgeable machine learning expert and a completely obsessed with **cats**...
 Here is a question:
 {input}"""
 
-data_analysis_template = """You are a skilled data analyst...
+data_analysis_template = """You are a skilled data analyst,.... respond in json format...
 Here is a question:
 {input}"""
 ```
@@ -56,7 +58,27 @@ prompt_infos = [
 2. Execute the corresponding chain based on the result.
 3. Implement fallback logic for unrecognized intents.
 
-### Iteration 5: Testing
+
+### Iteration 5: Cli Interface
+Use the argparse library or an interactive console loop to receive user input.
+```
+def main():
+    print("Welcome to the prompt router. Type 'exit' or 'quit' to exit.")
+    while True:
+        user_input = input("User: ")
+        if user_input.lower() in ['exit', 'quit']:
+            break
+        answer = process_query(user_input)
+        print("Assistant:", answer)
+
+if __name__ == "__main__":
+    main()
+```
+
+
+
+
+### Iteration 6: Testing
 
 1. Try several questions:
    - "What is cross-validation in ML?"
