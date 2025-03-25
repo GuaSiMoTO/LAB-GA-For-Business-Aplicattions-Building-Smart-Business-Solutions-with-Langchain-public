@@ -2,116 +2,72 @@
 
 ![Langflow Logo](https://user-images.githubusercontent.com/970858/63474771-d6734700-c469-11e9-83bb-9429da563909.png)
 
-## Submission
+# Intent Routing with Langchain
 
-1. Push your completed Langchain script to your GitHub repository.
-2. Create a Pull Request with a description of your implementations.
+## Objective
 
----
+Create a prompt router that redirects user questions to specialized templates based on intent, using Langchain and Ollama.
 
-# Introduction
+## Requirements
 
-This lab develops an interactive web application that allows users to upload PDFs, extract their content, index it with embeddings, and perform natural language queries. Langchain and Streamlit tools are integrated to create a chat interface for querying information from PDFs.
+- Jupyter Notebook with installed dependencies.
+- Ollama running with an available model.
+- Well-documented code in the notebook.
 
----
+## Iterations
 
-# Requirements
+### Iteration 1: Langchain Setup
 
-Before starting, configure the environment and install the necessary libraries:
+1. Create an environment with `langchain` and `ollama`.
+2. Test a simple prompt to verify Ollama is working.
 
-```bash
-pip install streamlit langchain_community langchain_text_splitters pdfplumber langchain_ollama langchain_core
-```
+### Iteration 2: Create Specialized Templates
 
----
-
-## Iteration 1: PDF Upload and Extraction
-
-Use Streamlit to create an input for uploading PDF files and `PDFPlumberLoader` to load and extract its content. Additionally, use `tempfile` to temporarily save the file:
+Define the following templates:
 
 ```python
-import streamlit as st
-import tempfile
-from langchain_community.document_loaders import PDFPlumberLoader
+machine_learning_template = """You are a highly knowledgeable machine learning expert...
+Here is a question:
+{input}"""
 
-st.title("Upload PDF")
-uploaded_file = st.file_uploader("Upload PDF", type="pdf", accept_multiple_files=False)
-
-if uploaded_file:
-    documents = load_pdf(uploaded_file)
-  
-
-def load_pdf(file_obj):
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
-        tmp.write(file_obj.getbuffer())
-        tmp.flush()  
-        loader = PDFPlumberLoader(tmp.name)
-        documents = loader.load()
-    return documents
+data_analysis_template = """You are a skilled data analyst...
+Here is a question:
+{input}"""
 ```
 
----
-
-## Iteration 2: Text Segmentation
-
-Once the PDF content is accessible, segment it into smaller, manageable text chunks:
+Group them as follows:
 
 ```python
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+prompt_infos = [
+    {"name": "machine learning", "description": "Good for ML questions", "prompt_template": machine_learning_template},
+    {"name": "data analysis", "description": "Good for data analysis", "prompt_template": data_analysis_template}
+]
 ```
 
----
+### Iteration 3: Set Up the Router
 
-## Iteration 3: Content Indexing
+1. Define `MULTI_PROMPT_ROUTER_TEMPLATE`.
+2. Create a parser to interpret the JSON output.
+3. Build the routing chain.
 
-Now, add embeddings to the `vector_store` and store the segmented document:
+### Iteration 4: Routing Logic
 
-```python
-from langchain_core.vectorstores import InMemoryVectorStore
-from langchain_ollama import OllamaEmbeddings
+1. Use the router to detect the user intent.
+2. Execute the corresponding chain based on the result.
+3. Implement fallback logic for unrecognized intents.
 
-embeddings = OllamaEmbeddings(model="bge-m3:latest")
-vector_store = InMemoryVectorStore(embeddings)
-vector_store.add_documents(documents)
-```
+### Iteration 5: Testing
 
----
+1. Try several questions:
+   - "What is cross-validation in ML?"
+   - "How do I visualize categorical data?"
+2. Verify that the response comes from the correct template.
 
-## Iteration 4: Vector Retrieval
+## Expected Output
 
-After storing the information, retrieve stored fragments and verify that the information is correctly returned:
-
-```python
-vector_store.similarity_search("Summary of instructions")
-```
-
----
-
-## Iteration 5: Response Generation
-
-Using a locally installed Ollama model such as `deepseek-r1:8b` or a Hugging Face model via their API inference, generate a response based on the PDF content.
-
-Optional prompt:
-
-```python
-template = """
-You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. Use three sentences maximum and keep the answer concise.
-Question: {question} 
-Context: {context} 
-Answer:
-"""
-```
-
----
-
-## Iteration 6: Full Integration
-
-Integrate all functionalities, allowing users to enter queries about the PDF in an input field, so the model can provide relevant answers on the web interface.
-
-
-
-
-
+- User: "What is cross-validation in machine learning?"
+- Router: Selects `machine_learning_template`.
+- Assistant: "Cross-validation is a technique for assessing..."
 
 ## Additional Resources
 
