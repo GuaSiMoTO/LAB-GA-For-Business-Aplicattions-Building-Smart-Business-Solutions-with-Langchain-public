@@ -44,10 +44,21 @@ prompt_infos = [
 ```
 
 ## Iteration 3: Set Up the Router
+1. Define `TEMPLATE_MAP`.
+```
+template_map = {
+    "machine learning": machine_learning_template,
+...... }
+```
 
-1. Define `MULTI_PROMPT_ROUTER_TEMPLATE`.
-2. Create a parser to interpret the JSON output.
-3. Build the routing chain.
+2. Define `MULTI_PROMPT_ROUTER_TEMPLATE`.
+```
+MULTI_PROMPT_ROUTER_TEMPLATE = """
+Given the following user query: "{input}", determine the appropriate specialized prompt template.....
+```
+
+3. Create a parser to interpret the JSON output.
+4. Build the routing chain.
 
 ## Iteration 4: Routing Logic
 
