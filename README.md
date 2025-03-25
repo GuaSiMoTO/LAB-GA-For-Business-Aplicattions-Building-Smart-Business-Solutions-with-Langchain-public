@@ -58,7 +58,7 @@ prompt_infos = [
 
 ## Iteration 5: Cli Interface
 Use the argparse library or an interactive console loop to receive user input.
-```
+```python
 def main():
     print("Welcome to the prompt router. Type 'exit' or 'quit' to exit.")
     while True:
