@@ -2,8 +2,6 @@
 
 ![Langflow Logo](https://user-images.githubusercontent.com/970858/63474771-d6734700-c469-11e9-83bb-9429da563909.png)
 
-# Intent Routing with Langchain
-
 ## Objective
 
 Create a prompt router that redirects user questions to specialized templates based on intent, using Langchain and Ollama.
@@ -14,16 +12,15 @@ Create a prompt router that redirects user questions to specialized templates ba
 - Ollama running with an available model.
 - Well-documented code in the notebook.
 
-## Iterations
 
-### Iteration 1: Langchain Setup
+## Iteration 1: Langchain Setup
 
 1. Create an environment with `langchain` and `ollama`.
 ```pip install langchain_ollama```
 
 2. Test a simple prompt to verify Ollama is working.
 
-### Iteration 2: Create Specialized Templates
+## Iteration 2: Create Specialized Templates
 
 Define the following templates:
 
@@ -46,20 +43,20 @@ prompt_infos = [
 ]
 ```
 
-### Iteration 3: Set Up the Router
+## Iteration 3: Set Up the Router
 
 1. Define `MULTI_PROMPT_ROUTER_TEMPLATE`.
 2. Create a parser to interpret the JSON output.
 3. Build the routing chain.
 
-### Iteration 4: Routing Logic
+## Iteration 4: Routing Logic
 
 1. Use the router to detect the user intent.
 2. Execute the corresponding chain based on the result.
 3. Implement fallback logic for unrecognized intents.
 
 
-### Iteration 5: Cli Interface
+## Iteration 5: Cli Interface
 Use the argparse library or an interactive console loop to receive user input.
 ```
 def main():
@@ -75,10 +72,7 @@ if __name__ == "__main__":
     main()
 ```
 
-
-
-
-### Iteration 6: Testing
+## Iteration 6: Testing
 
 1. Try several questions:
    - "What is cross-validation in ML?"
