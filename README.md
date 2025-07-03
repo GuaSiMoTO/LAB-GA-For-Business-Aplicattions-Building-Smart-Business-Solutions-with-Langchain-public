@@ -90,7 +90,7 @@ if __name__ == "__main__":
    - "How do I visualize categorical data?"
 2. Verify that the response comes from the correct template.
 
-## Expected Output
+**Expected Output**
 
 - User: "What is cross-validation in machine learning?"
 - Router: Selects `machine_learning_template`.
